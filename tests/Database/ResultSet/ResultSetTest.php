@@ -87,12 +87,5 @@ SQL);
         $connection->callHandle()->exec('INSERT INTO users (user_id, name) VALUES (123, "hoge");');
         $statement = $connection->callHandle()->prepare('SELECT user_id, name FROM users;');
         $resultSet = new ResultSet($statement, UserEntity::class);
-
-//        $userEntity = $resultSet->getIterator()->current();
-//        var_dump($userEntity);
-        foreach ($resultSet as $item)
-        {
-            var_dump($item);
-        }
     }
 }
