@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace Citrus\Database;
 
 use Citrus\Database\Column\Base;
+use Citrus\Variable\Binders;
 use Citrus\Variable\Dates;
-use Citrus\Variable\Structs;
 
 /**
  * データベースカラム情報
@@ -20,7 +20,7 @@ use Citrus\Variable\Structs;
 class Column
 {
     use Base;
-    use Structs;
+    use Binders;
 
     /** @var string schema */
     public $schema;
@@ -142,7 +142,16 @@ class Column
     public function notNullPropertyAndIgnoreClassProperties(array $class_names = []): array
     {
         // null以外のプロパティー
-        $not_null_properties = $this->notNullProperties();
+        $properties = $this->properties();
+
+        $not_null_properties = [];
+        foreach ($properties as $ky => $vl)
+        {
+            if (false === is_null($vl))
+            {
+                $not_null_properties[$ky] = $vl;
+            }
+        }
 
         // 指定クラスのプロパティーを削除する
         foreach ($class_names as $class_name)
