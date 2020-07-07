@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 namespace Citrus\Database\Result;
 
-use Citrus\Database\Column;
+use Citrus\Database\Columns;
 
 /**
  * 年月
  * @deprecated 使ってないんじゃないかな
  */
-class Yearmonth extends Column
+class Yearmonth extends Columns
 {
     /** @var int year */
     public $year;

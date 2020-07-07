@@ -5,10 +5,10 @@
 
 namespace Test\Sample\Integration\Property;
 
-use Citrus\Database\Column;
+use Citrus\Database\Columns;
 use Test\Sample\Integration\Condition\UserCondition;
 
-class UserProperty extends Column
+class UserProperty extends Columns
 {
     /** @var int ユーザーID */
     public $user_id;
