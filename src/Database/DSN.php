@@ -13,8 +13,8 @@ namespace Citrus\Database;
 use Citrus\Configure\Configurable;
 use Citrus\Database\DSN\Postgres;
 use Citrus\Database\DSN\Sqlite;
+use Citrus\Variable\Binders;
 use Citrus\Variable\Instance;
-use Citrus\Variable\Structs;
 
 /**
  * DSN定義
@@ -22,7 +22,7 @@ use Citrus\Variable\Structs;
 class DSN extends Configurable
 {
     use Instance;
-    use Structs;
+    use Binders;
     use Postgres;
     use Sqlite;
 
