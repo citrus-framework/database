@@ -10,14 +10,14 @@ declare(strict_types=1);
 
 namespace Citrus\Database;
 
-use Citrus\Database\Column\Base;
+use Citrus\Database\Columns\Base;
 use Citrus\Variable\Binders;
 use Citrus\Variable\Dates;
 
 /**
  * データベースカラム情報
  */
-class Column
+class Columns
 {
     use Base;
     use Binders;

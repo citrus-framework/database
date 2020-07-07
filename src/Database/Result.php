@@ -15,7 +15,7 @@ use Citrus\Database\ResultSet\ResultClass;
 /**
  * 汎用結果
  */
-class Result extends Column implements ResultClass
+class Result extends Columns implements ResultClass
 {
     /** @var int count */
     public $count;
