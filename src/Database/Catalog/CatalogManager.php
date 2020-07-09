@@ -35,11 +35,13 @@ class CatalogManager
         if (true === $dsn->isPostgreSQL())
         {
             $this->catalogDriver = new Postgres($dsn);
+            return;
         }
         // SQLite
-        else if (true === $dsn->isSQLite())
+        if (true === $dsn->isSQLite())
         {
             $this->catalogDriver = new Sqlite($dsn);
+            return;
         }
     }
 

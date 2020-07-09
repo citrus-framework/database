@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Citrus\Database;
 
 use Citrus\Database\Connection\Connection;
+use Citrus\Database\Connection\ConnectionPool;
 use Citrus\Database\ResultSet\ResultSet;
 use PDOStatement;
 
@@ -27,12 +28,13 @@ class Executor
     /**
      * constructor.
      *
-     * @param Connection  $connection  接続情報
+     * @param Connection|null $connection  接続情報
      * @throws DatabaseException
      */
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection = null)
     {
-        $this->connection = $connection;
+        // なければPOOLから取得
+        $this->connection = ($connection ?: ConnectionPool::callDefault());
         // 接続もしてしまう
         $this->connection->connect();
     }
