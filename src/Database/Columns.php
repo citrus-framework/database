@@ -143,43 +143,4 @@ class Columns
             }
         }
     }
-
-
-
-    /**
-     * object vars getter of (not null property) and (ignore slasses property)
-     *
-     * @param string[] $class_names 削除したいプロパティーを持つクラスのクラス名配列
-     * @return array
-     */
-    public function notNullPropertyAndIgnoreClassProperties(array $class_names = []): array
-    {
-        // null以外のプロパティー
-        $properties = $this->properties();
-
-        $not_null_properties = [];
-        foreach ($properties as $ky => $vl)
-        {
-            if (false === is_null($vl))
-            {
-                $not_null_properties[$ky] = $vl;
-            }
-        }
-
-        // 指定クラスのプロパティーを削除する
-        foreach ($class_names as $class_name)
-        {
-            // 指定クラスのプロパティーを削除する
-            $class_property_keys = array_keys(get_class_vars($class_name));
-            foreach ($class_property_keys as $class_property_key)
-            {
-                if (true === array_key_exists($class_property_key, $not_null_properties))
-                {
-                    unset($not_null_properties[$class_property_key]);
-                }
-            }
-        }
-
-        return $not_null_properties;
-    }
 }
