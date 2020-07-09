@@ -48,7 +48,7 @@ class Executor
      * @return ResultSet
      * @throws DatabaseException
      */
-    public function select(QueryPack $queryPack): ResultSet
+    public function selectQuery(QueryPack $queryPack): ResultSet
     {
         // プリペアとパラメータ設定
         $statement = $this->prepareAndBind($queryPack);
@@ -65,7 +65,7 @@ class Executor
      * @return int
      * @throws DatabaseException
      */
-    public function insert(QueryPack $queryPack): int
+    public function insertQuery(QueryPack $queryPack): int
     {
         // プリペアとパラメータ設定
         $statement = $this->prepareAndBind($queryPack);
@@ -85,7 +85,7 @@ class Executor
      * @return int
      * @throws DatabaseException
      */
-    public function update(QueryPack $queryPack): int
+    public function updateQuery(QueryPack $queryPack): int
     {
         // プリペアとパラメータ設定
         $statement = $this->prepareAndBind($queryPack);
@@ -105,7 +105,7 @@ class Executor
      * @return int
      * @throws DatabaseException
      */
-    public function delete(QueryPack $queryPack): int
+    public function deleteQuery(QueryPack $queryPack): int
     {
         // 削除全実行はフレームワークとして許容しない(全実行する場合は条件を明示的につける ex.)WHERE 1=1)
         DatabaseException::exceptionIf(
@@ -131,7 +131,7 @@ class Executor
      * @return PDOStatement
      * @throws DatabaseException
      */
-    private function prepareAndBind(QueryPack $queryPack): PDOStatement
+    protected function prepareAndBind(QueryPack $queryPack): PDOStatement
     {
         // ハンドル
         $handle = $this->connection->callHandle();
