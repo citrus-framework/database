@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Citrus\Database;
 
-use Citrus\Database\Columns\Base;
 use Citrus\Variable\Binders;
 use Citrus\Variable\Dates;
 
@@ -19,11 +18,25 @@ use Citrus\Variable\Dates;
  */
 class Columns
 {
-    use Base;
     use Binders;
 
     /** @var string schema */
     public $schema;
+
+    /** @var string status */
+    public $status = 0;
+
+    /** @var string created_at */
+    public $created_at;
+
+    /** @var string updated_at */
+    public $updated_at;
+
+    /** @var int rowid */
+    public $rowid;
+
+    /** @var int rev */
+    public $rev;
 
 
 
