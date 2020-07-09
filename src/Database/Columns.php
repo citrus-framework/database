@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Citrus\Database;
 
-use Citrus\Database\Columns\Base;
 use Citrus\Variable\Binders;
 use Citrus\Variable\Dates;
 
@@ -19,11 +18,25 @@ use Citrus\Variable\Dates;
  */
 class Columns
 {
-    use Base;
     use Binders;
 
     /** @var string schema */
     public $schema;
+
+    /** @var string status */
+    public $status = 0;
+
+    /** @var string created_at */
+    public $created_at;
+
+    /** @var string updated_at */
+    public $updated_at;
+
+    /** @var int rowid */
+    public $rowid;
+
+    /** @var int rev */
+    public $rev;
 
 
 
@@ -38,7 +51,7 @@ class Columns
 
 
     /**
-     * {@inheritdoc}
+     * インスタンスのプロパティを配列で取得
      */
     public function properties(): array
     {
@@ -58,7 +71,7 @@ class Columns
 
 
     /**
-     * call primary keys
+     * プライマリキーのカラム名配列を取得
      *
      * @return string[]
      */
@@ -70,7 +83,7 @@ class Columns
 
 
     /**
-     * complete insert column
+     * INSERT時に必要なカラム情報を補完する
      *
      * @param string|null $timestamp
      */
@@ -87,7 +100,7 @@ class Columns
 
 
     /**
-     * complete modify column
+     * UPDATE時に必要なカラム情報を補完する
      *
      * @param string|null $timestamp
      */
@@ -103,7 +116,7 @@ class Columns
 
 
     /**
-     * null to blank
+     * nullを空文字に変更する
      */
     public function null2blank(): void
     {
@@ -117,7 +130,7 @@ class Columns
 
 
     /**
-     * all nullify
+     * 全てのインスタンス変数にnullを代入する
      */
     public function nullify(): void
     {
@@ -129,44 +142,5 @@ class Columns
                 $this->$ky = null;
             }
         }
-    }
-
-
-
-    /**
-     * object vars getter of (not null property) and (ignore slasses property)
-     *
-     * @param string[] $class_names 削除したいプロパティーを持つクラスのクラス名配列
-     * @return array
-     */
-    public function notNullPropertyAndIgnoreClassProperties(array $class_names = []): array
-    {
-        // null以外のプロパティー
-        $properties = $this->properties();
-
-        $not_null_properties = [];
-        foreach ($properties as $ky => $vl)
-        {
-            if (false === is_null($vl))
-            {
-                $not_null_properties[$ky] = $vl;
-            }
-        }
-
-        // 指定クラスのプロパティーを削除する
-        foreach ($class_names as $class_name)
-        {
-            // 指定クラスのプロパティーを削除する
-            $class_property_keys = array_keys(get_class_vars($class_name));
-            foreach ($class_property_keys as $class_property_key)
-            {
-                if (true === array_key_exists($class_property_key, $not_null_properties))
-                {
-                    unset($not_null_properties[$class_property_key]);
-                }
-            }
-        }
-
-        return $not_null_properties;
     }
 }
