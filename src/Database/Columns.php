@@ -51,7 +51,7 @@ class Columns
 
 
     /**
-     * {@inheritdoc}
+     * インスタンスのプロパティを配列で取得
      */
     public function properties(): array
     {
@@ -71,7 +71,7 @@ class Columns
 
 
     /**
-     * call primary keys
+     * プライマリキーのカラム名配列を取得
      *
      * @return string[]
      */
@@ -83,7 +83,7 @@ class Columns
 
 
     /**
-     * complete insert column
+     * INSERT時に必要なカラム情報を補完する
      *
      * @param string|null $timestamp
      */
@@ -100,7 +100,7 @@ class Columns
 
 
     /**
-     * complete modify column
+     * UPDATE時に必要なカラム情報を補完する
      *
      * @param string|null $timestamp
      */
@@ -116,7 +116,7 @@ class Columns
 
 
     /**
-     * null to blank
+     * nullを空文字に変更する
      */
     public function null2blank(): void
     {
@@ -130,7 +130,7 @@ class Columns
 
 
     /**
-     * all nullify
+     * 全てのインスタンス変数にnullを代入する
      */
     public function nullify(): void
     {
