@@ -23,10 +23,10 @@ use PDOStatement;
 class ResultSet implements IteratorAggregate, Countable
 {
     /** @var PDOStatement */
-    private $statement;
+    private PDOStatement $statement;
 
     /** @var string 返却クラス */
-    private $result_class;
+    private string $result_class;
 
 
 
@@ -47,7 +47,7 @@ class ResultSet implements IteratorAggregate, Countable
     /**
      * {@inheritDoc}
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         $this->statement->execute();
         $this->statement->setFetchMode(PDO::FETCH_CLASS, $this->result_class);
