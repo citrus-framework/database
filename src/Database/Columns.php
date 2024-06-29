@@ -24,7 +24,7 @@ class Columns extends \stdClass
      * constructor.
      *
      * @param string|null $schema
-     * @param string|null $status
+     * @param int|null $status
      * @param string|null $created_at
      * @param string|null $updated_at
      * @param int|null    $rowid
@@ -32,7 +32,7 @@ class Columns extends \stdClass
      */
     public function __construct(
         public string|null $schema = null,
-        public string|null $status = '0',
+        public int|null $status = 0,
         public string|null $created_at = null,
         public string|null $updated_at = null,
         public int|null $rowid = null,
