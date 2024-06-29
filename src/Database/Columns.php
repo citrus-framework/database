@@ -31,14 +31,14 @@ class Columns extends \stdClass
      * @param int|null    $rev
      */
     public function __construct(
-        public string|null $schema,
+        public string|null $schema = null,
         public string|null $status = '0',
         public string|null $created_at = null,
         public string|null $updated_at = null,
         public int|null $rowid = null,
         public int|null $rev = 1,
     ) {
-        $this->schema = DSN::getInstance()->schema;
+        $this->schema = $schema ?? DSN::getInstance()->schema;
     }
 
     /**
