@@ -27,7 +27,7 @@ class DSN extends Configurable
     use Sqlite;
 
     /** @var string */
-    public string$type;
+    public string $type;
 
     /** @var string */
     public string $hostname;
@@ -38,8 +38,8 @@ class DSN extends Configurable
     /** @var string */
     public string $database;
 
-    /** @var string */
-    public string $schema;
+    /** @var string|null */
+    public string|null $schema = null;
 
     /** @var string|null */
     public string|null $username = null;
