@@ -21,8 +21,8 @@ class QueryPack
     /** @var array パラメータ */
     protected array $parameters = [];
 
-    /** @var string 結果クラス */
-    protected string $result_class;
+    /** @var string|null 結果クラス */
+    protected string|null $result_class = null;
 
     /**
      * クエリの取得
@@ -62,7 +62,7 @@ class QueryPack
      * @param string|null $result_class 結果クラス
      * @return self
      */
-    public static function pack(string $query, array $parameters, ?string $result_class)
+    public static function pack(string $query, array $parameters, string|null $result_class)
     {
         $self = new self();
         $self->query = $query;
