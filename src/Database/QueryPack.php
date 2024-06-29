@@ -16,15 +16,13 @@ namespace Citrus\Database;
 class QueryPack
 {
     /** @var string クエリ */
-    protected $query;
+    protected string $query;
 
     /** @var array パラメータ */
-    protected $parameters = [];
+    protected array $parameters = [];
 
     /** @var string 結果クラス */
-    protected $result_class;
-
-
+    protected string $result_class;
 
     /**
      * クエリの取得
@@ -36,8 +34,6 @@ class QueryPack
         return $this->query;
     }
 
-
-
     /**
      * パラメタの取得
      *
@@ -48,8 +44,6 @@ class QueryPack
         return $this->parameters;
     }
 
-
-
     /**
      * 結果クラスの取得
      *
@@ -59,8 +53,6 @@ class QueryPack
     {
         return $this->result_class;
     }
-
-
 
     /**
      * ジェネレータ

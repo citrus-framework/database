@@ -29,8 +29,6 @@ class DatabaseException extends CitrusException
         return new static($e->getMessage(), $e->getCode());
     }
 
-
-
     /**
      * pdo errorInfo
      *
@@ -42,8 +40,6 @@ class DatabaseException extends CitrusException
         return new static(sprintf('[%s] %s', $errorInfo[0], $errorInfo[2]), $errorInfo[1]);
     }
 
-
-
     /**
      * {@inheritDoc}
      *
@@ -53,8 +49,6 @@ class DatabaseException extends CitrusException
     {
         parent::exceptionIf($expr, $message);
     }
-
-
 
     /**
      * {@inheritDoc}

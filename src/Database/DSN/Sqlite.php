@@ -16,11 +16,9 @@ namespace Citrus\Database\DSN;
 trait Sqlite
 {
     /** @var string[] SQLite */
-    public static $TYPES_SQLITE = [
+    public static array $TYPES_SQLITE = [
         'sqlite',
     ];
-
-
 
     /**
      * データベースタイプがSQLiteかどうか

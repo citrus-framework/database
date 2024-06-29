@@ -22,27 +22,17 @@ use PDOStatement;
  */
 class ResultSet implements IteratorAggregate, Countable
 {
-    /** @var PDOStatement */
-    private PDOStatement $statement;
-
-    /** @var string 返却クラス */
-    private string $result_class;
-
-
-
     /**
      * constructor.
      *
      * @param PDOStatement $statement    PDOのステートメント
-     * @param string        $result_class 返却型
+     * @param string        $result_class 返却クラス
      */
-    public function __construct(PDOStatement $statement, string $result_class)
-    {
-        $this->statement = $statement;
-        $this->result_class = $result_class;
+    public function __construct(
+        private readonly PDOStatement $statement,
+        private readonly string $result_class,
+    ) {
     }
-
-
 
     /**
      * {@inheritDoc}
@@ -66,8 +56,6 @@ class ResultSet implements IteratorAggregate, Countable
         }
     }
 
-
-
     /**
      * 配列化して取得
      *
@@ -85,8 +73,6 @@ class ResultSet implements IteratorAggregate, Countable
         return $results;
     }
 
-
-
     /**
      * 件数取得
      *
@@ -97,19 +83,15 @@ class ResultSet implements IteratorAggregate, Countable
         return count($this->execute()->fetchAll());
     }
 
-
-
     /**
      * 1件取得
      *
      * @return ResultClass
      */
-    public function one()
+    public function one(): ResultClass
     {
         return $this->getIterator()->current();
     }
-
-
 
     /**
      * ステートメントの実行

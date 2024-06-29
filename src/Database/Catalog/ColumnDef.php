@@ -16,15 +16,13 @@ namespace Citrus\Database\Catalog;
 class ColumnDef
 {
     /** @var string カラム名 */
-    public $column_name = '';
+    public string $column_name = '';
 
     /** @var string データタイプ */
-    public $data_type = '';
+    public string $data_type = '';
 
     /** @var string コメント */
-    public $comment = '';
-
-
+    public string $comment = '';
 
     /**
      * 生成処理(データタイプ用)
@@ -41,8 +39,6 @@ class ColumnDef
         return $column;
     }
 
-
-
     /**
      * 生成処理(コメント用)
      *
@@ -50,7 +46,7 @@ class ColumnDef
      * @param string|null $comment     コメント
      * @return self
      */
-    public static function forComment(string $column_name, string $comment = null): self
+    public static function forComment(string $column_name, string|null $comment = null): self
     {
         $column = new self();
         $column->column_name = $column_name;

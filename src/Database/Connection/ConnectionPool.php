@@ -18,12 +18,10 @@ use Citrus\Database\DSN;
 class ConnectionPool
 {
     /** @var Connection[] */
-    private static $POOLS = [];
+    private static array $POOLS = [];
 
     /** @var string|null デフォルト接続キー */
-    private static $DEFAULT_POOL_KEY;
-
-
+    private static string|null $DEFAULT_POOL_KEY;
 
     /**
      * Connectionの生成と取得
@@ -32,7 +30,7 @@ class ConnectionPool
      * @param bool|null $is_default defaultコネクション
      * @return Connection
      */
-    public static function callConnection(DSN $dsn = null, bool $is_default = false): Connection
+    public static function callConnection(DSN|null $dsn = null, bool $is_default = false): Connection
     {
         $dsn_key = $dsn->toString();
         // 生成して設定
@@ -45,8 +43,6 @@ class ConnectionPool
         // 取得
         return self::$POOLS[$dsn_key];
     }
-
-
 
     /**
      * デフォルト設定されているコネクションを取得
