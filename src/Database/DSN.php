@@ -27,30 +27,28 @@ class DSN extends Configurable
     use Sqlite;
 
     /** @var string */
-    public $type;
+    public string$type;
 
     /** @var string */
-    public $hostname;
+    public string $hostname;
 
     /** @var string */
-    public $port;
+    public string $port;
 
     /** @var string */
-    public $database;
+    public string $database;
 
     /** @var string */
-    public $schema;
+    public string $schema;
 
-    /** @var string */
-    public $username;
+    /** @var string|null */
+    public string|null $username = null;
 
-    /** @var string */
-    public $password;
+    /** @var string|null */
+    public string|null $password = null;
 
     /** @var array */
-    public $options;
-
-
+    public array $options = [];
 
     /**
      * {@inheritDoc}
@@ -67,8 +65,6 @@ class DSN extends Configurable
         return $this;
     }
 
-
-
     /**
      * generate dsn string
      *
@@ -79,7 +75,8 @@ class DSN extends Configurable
         // PostgreSQL
         if (true === $this->isPostgreSQL())
         {
-            return sprintf('pgsql:host=%s;port=%s;dbname=%s',
+            return sprintf(
+                'pgsql:host=%s;port=%s;dbname=%s',
                 $this->hostname,
                 $this->port,
                 $this->database
@@ -88,15 +85,14 @@ class DSN extends Configurable
         // SQLite
         if (true === $this->isSQLite())
         {
-            return sprintf('sqlite:%s',
+            return sprintf(
+                'sqlite:%s',
                 $this->hostname
             );
         }
 
         return '';
     }
-
-
 
     /**
      * generate dsn string with authentication
@@ -108,7 +104,8 @@ class DSN extends Configurable
         // PostgreSQL
         if (true === $this->isPostgreSQL())
         {
-            return sprintf('pgsql:host=%s;port=%s;dbname=%s;user=%s;password=%s',
+            return sprintf(
+                'pgsql:host=%s;port=%s;dbname=%s;user=%s;password=%s',
                 $this->hostname,
                 $this->port,
                 $this->database,
@@ -119,15 +116,14 @@ class DSN extends Configurable
         // SQLite
         if (true === $this->isSQLite())
         {
-            return sprintf('sqlite:%s',
+            return sprintf(
+                'sqlite:%s',
                 $this->hostname
             );
         }
 
         return '';
     }
-
-
 
     /**
      * {@inheritDoc}
@@ -137,8 +133,6 @@ class DSN extends Configurable
         return 'database';
     }
 
-
-
     /**
      * {@inheritDoc}
      */
@@ -146,8 +140,6 @@ class DSN extends Configurable
     {
         return [];
     }
-
-
 
     /**
      * {@inheritDoc}

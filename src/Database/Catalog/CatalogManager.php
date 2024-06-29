@@ -20,9 +20,7 @@ use Citrus\Database\DSN;
 class CatalogManager
 {
     /** @var CatalogDriver DBタイプ別のクラス */
-    private $catalogDriver;
-
-
+    private CatalogDriver $catalogDriver;
 
     /**
      * constructor.
@@ -45,8 +43,6 @@ class CatalogManager
         }
     }
 
-
-
     /**
      * テーブルのカラム定義の取得
      *
@@ -58,8 +54,6 @@ class CatalogManager
         return $this->catalogDriver->tableColumns($table_name);
     }
 
-
-
     /**
      * テーブルのカラム定義の取得
      *
@@ -70,8 +64,6 @@ class CatalogManager
     {
         return $this->catalogDriver->columnComments($table_name);
     }
-
-
 
     /**
      * テーブルのプライマリキー定義の取得

@@ -18,7 +18,7 @@ trait BindColumn
     /**
      * @return $this
      */
-    public function bindColumn()
+    public function bindColumn(): self
     {
         return $this;
     }

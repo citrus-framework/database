@@ -19,25 +19,17 @@ use PDO;
  */
 class Connection
 {
-    /** @var DSN */
-    public $dsn;
-
-    /** @var PDO */
-    private $handle;
-
-
-
     /**
      * constructor.
      *
-     * @param DSN|null $dsn DSN情報
+     * @param DSN|null $dsn    DSN情報
+     * @param PDO|null $handle ハンドラー
      */
-    public function __construct(DSN $dsn = null)
-    {
-        $this->dsn = $dsn;
+    public function __construct(
+        public DSN|null $dsn = null,
+        public PDO|null $handle = null,
+    ) {
     }
-
-
 
     /**
      * destructor.
@@ -46,8 +38,6 @@ class Connection
     {
         $this->disconnect();
     }
-
-
 
     /**
      * データベース接続
@@ -79,8 +69,6 @@ class Connection
         }
     }
 
-
-
     /**
      * データベース切断
      *
@@ -90,8 +78,6 @@ class Connection
     {
         $this->handle = null;
     }
-
-
 
     /**
      * ハンドルの取得
@@ -106,8 +92,6 @@ class Connection
         return $this->handle;
     }
 
-
-
     /**
      * トランザクション開始
      *
@@ -120,8 +104,6 @@ class Connection
             $this->handle->beginTransaction();
         }
     }
-
-
 
     /**
      * コミット
@@ -136,8 +118,6 @@ class Connection
         }
     }
 
-
-
     /**
      * ロールバック
      *
@@ -150,8 +130,6 @@ class Connection
             $this->handle->rollBack();
         }
     }
-
-
 
     /**
      * トランザクション処理

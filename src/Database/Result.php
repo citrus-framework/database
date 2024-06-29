@@ -18,36 +18,33 @@ use Citrus\Database\ResultSet\ResultClass;
 class Result extends Columns implements ResultClass
 {
     /** @var int count */
-    public $count;
+    public int $count;
 
     /** @var int sum */
-    public $sum;
+    public int $sum;
 
     /** @var int avg */
-    public $avg;
+    public int $avg;
 
     /** @var int max */
-    public $max;
+    public int $max;
 
     /** @var int min */
-    public $min;
+    public int $min;
 
     /** @var int id */
-    public $id;
+    public int $id;
 
     /** @var string name */
-    public $name;
-
-
+    public string $name;
 
     /**
      * 結果内容のバインド
-     *
      * 必要ないパターンも多いので、実装化してしまう
      *
      * @return self
      */
-    public function bindColumn()
+    public function bindColumn(): self
     {
         return $this;
     }

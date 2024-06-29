@@ -27,9 +27,10 @@ class Sqlite extends CatalogDriver
      */
     public function tableColumns(string $table_name): array
     {
-        $stmt = $this->handler->query(sprintf('PRAGMA table_info (%s);',
+        $stmt = $this->handler->query(sprintf(
+            'PRAGMA table_info (%s);',
             $this->handler->quote($table_name)
-            ));
+        ));
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $columns = [];
@@ -40,8 +41,6 @@ class Sqlite extends CatalogDriver
 
         return $columns;
     }
-
-
 
     /**
      * テーブルのカラム定義の取得
@@ -55,8 +54,6 @@ class Sqlite extends CatalogDriver
         return $this->tableColumns($table_name);
     }
 
-
-
     /**
      * テーブルのプライマリキー定義の取得
      *
@@ -65,7 +62,8 @@ class Sqlite extends CatalogDriver
      */
     public function primaryKeys(string $table_name): array
     {
-        $stmt = $this->handler->query(sprintf('PRAGMA table_info (%s);',
+        $stmt = $this->handler->query(sprintf(
+            'PRAGMA table_info (%s);',
             $this->handler->quote($table_name)
         ));
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

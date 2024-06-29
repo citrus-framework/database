@@ -16,39 +16,30 @@ use Citrus\Variable\Dates;
 /**
  * データベースカラム情報
  */
-class Columns
+class Columns extends \stdClass
 {
     use Binders;
 
-    /** @var string schema */
-    public $schema;
-
-    /** @var string status */
-    public $status = 0;
-
-    /** @var string created_at */
-    public $created_at;
-
-    /** @var string updated_at */
-    public $updated_at;
-
-    /** @var int rowid */
-    public $rowid;
-
-    /** @var int rev */
-    public $rev;
-
-
-
     /**
      * constructor.
+     *
+     * @param string|null $schema
+     * @param string|null $status
+     * @param string|null $created_at
+     * @param string|null $updated_at
+     * @param int|null    $rowid
+     * @param int|null    $rev
      */
-    public function __construct()
-    {
+    public function __construct(
+        public string|null $schema,
+        public string|null $status = '0',
+        public string|null $created_at = null,
+        public string|null $updated_at = null,
+        public int|null $rowid = null,
+        public int|null $rev = 1,
+    ) {
         $this->schema = DSN::getInstance()->schema;
     }
-
-
 
     /**
      * インスタンスのプロパティを配列で取得
@@ -68,8 +59,6 @@ class Columns
         return $properties;
     }
 
-
-
     /**
      * プライマリキーのカラム名配列を取得
      *
@@ -80,14 +69,12 @@ class Columns
         return [];
     }
 
-
-
     /**
      * INSERT時に必要なカラム情報を補完する
      *
      * @param string|null $timestamp
      */
-    public function completeCreateColumn(string $timestamp = null): void
+    public function completeCreateColumn(string|null $timestamp = null): void
     {
         // スキーマ設定
         $this->schema = $this->schema ?? DSN::getInstance()->schema;
@@ -97,14 +84,12 @@ class Columns
         $this->updated_at = $timestamp;
     }
 
-
-
     /**
      * UPDATE時に必要なカラム情報を補完する
      *
      * @param string|null $timestamp
      */
-    public function completeUpdateColumn(string $timestamp = null): void
+    public function completeUpdateColumn(string|null $timestamp = null): void
     {
         // スキーマ設定
         $this->schema = $this->schema ?? DSN::getInstance()->schema;
@@ -112,8 +97,6 @@ class Columns
         $timestamp = $timestamp ?? Dates::now()->format('Y-m-d H:i:s');
         $this->updated_at = $timestamp;
     }
-
-
 
     /**
      * nullを空文字に変更する
@@ -126,8 +109,6 @@ class Columns
             $this->$ky = ($vl ?? '');
         }
     }
-
-
 
     /**
      * 全てのインスタンス変数にnullを代入する

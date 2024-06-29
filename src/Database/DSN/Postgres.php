@@ -16,13 +16,11 @@ namespace Citrus\Database\DSN;
 trait Postgres
 {
     /** @var string[] PostgreSQL */
-    public static $TYPES_POSTGRESQL = [
+    public static array $TYPES_POSTGRESQL = [
         'pgsql',
         'postgres',
         'postgresql',
     ];
-
-
 
     /**
      * データベースタイプがPostgreSQLかどうか

@@ -18,26 +18,18 @@ use PDO;
  */
 abstract class CatalogDriver
 {
-    /** @var PDO DBハンドラ */
-    protected $handler;
-
-    /** @var DSN DB接続情報 */
-    protected $dsn;
-
-
-
     /**
      * constructor.
      *
-     * @param DSN $dsn
+     * @param DSN|null $dsn     DB接続情報
+     * @param PDO|null $handler DBハンドラ
      */
-    public function __construct(DSN $dsn)
-    {
-        $this->dsn = $dsn;
+    public function __construct(
+        protected DSN|null $dsn = null,
+        protected PDO|null $handler = null,
+    ) {
         $this->handler = new PDO($this->dsn->toStringWithAuth());
     }
-
-
 
     /**
      * テーブルのカラム定義の取得
@@ -47,8 +39,6 @@ abstract class CatalogDriver
      */
     abstract public function tableColumns(string $table_name): array;
 
-
-
     /**
      * テーブルのカラム定義の取得
      *
@@ -56,8 +46,6 @@ abstract class CatalogDriver
      * @return array
      */
     abstract public function columnComments(string $table_name): array;
-
-
 
     /**
      * テーブルのプライマリキー定義の取得

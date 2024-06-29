@@ -27,7 +27,8 @@ class Postgres extends CatalogDriver
      */
     public function tableColumns(string $table_name): array
     {
-        $stmt = $this->handler->prepare(<<<SQL
+        $stmt = $this->handler->prepare(
+            <<<SQL
 SELECT 
       column_name
     , column_default
@@ -41,8 +42,8 @@ SQL
         );
         $stmt->execute([
             ':database' => $this->dsn->database,
-            ':schema' => $this->dsn->schema,
-            ':table' => $table_name,
+            ':schema'   => $this->dsn->schema,
+            ':table'    => $table_name,
         ]);
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,8 +56,6 @@ SQL
         return $columns;
     }
 
-
-
     /**
      * テーブルのカラム定義の取得
      *
@@ -65,7 +64,8 @@ SQL
      */
     public function columnComments(string $table_name): array
     {
-        $stmt = $this->handler->prepare(<<<SQL
+        $stmt = $this->handler->prepare(
+            <<<SQL
 SELECT
       pg_stat_all_tables.relname
     , pg_attribute.attname
@@ -84,7 +84,7 @@ SQL
         );
         $stmt->execute([
             ':schema' => $this->dsn->schema,
-            ':table' => $table_name,
+            ':table'  => $table_name,
         ]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // コメントデータ
@@ -97,8 +97,6 @@ SQL
         return $comments;
     }
 
-
-
     /**
      * テーブルのプライマリキー定義の取得
      *
@@ -107,7 +105,8 @@ SQL
      */
     public function primaryKeys(string $table_name): array
     {
-        $stmt = $this->handler->prepare(<<<SQL
+        $stmt = $this->handler->prepare(
+            <<<SQL
 SELECT
       constraint_column_usage.column_name
 FROM information_schema.table_constraints
