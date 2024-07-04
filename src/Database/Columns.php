@@ -20,25 +20,30 @@ class Columns extends \stdClass
 {
     use Binders;
 
+    /** @var string|null schema */
+    public string|null $schema = null;
+
+    /** @var int|null status */
+    public int|null $status = 0;
+
+    /** @var string|null created_at */
+    public string|null $created_at = null;
+
+    /** @var string|null updated_at */
+    public string|null $updated_at = null;
+
+    /** @var int|null rowid */
+    public int|null $rowid = null;
+
+    /** @var int|null rev */
+    public int|null $rev = 0;
+
     /**
      * constructor.
-     *
-     * @param string|null $schema
-     * @param int|null $status
-     * @param string|null $created_at
-     * @param string|null $updated_at
-     * @param int|null    $rowid
-     * @param int|null    $rev
      */
-    public function __construct(
-        public string|null $schema = null,
-        public int|null $status = 0,
-        public string|null $created_at = null,
-        public string|null $updated_at = null,
-        public int|null $rowid = null,
-        public int|null $rev = 1,
-    ) {
-        $this->schema = $schema ?? DSN::getInstance()->schema;
+    public function __construct()
+    {
+        $this->schema = DSN::getInstance()->schema;
     }
 
     /**
