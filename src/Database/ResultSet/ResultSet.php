@@ -86,9 +86,9 @@ class ResultSet implements IteratorAggregate, Countable
     /**
      * 1件取得
      *
-     * @return ResultClass
+     * @return ResultClass|null
      */
-    public function one(): ResultClass
+    public function one(): ResultClass|null
     {
         return $this->getIterator()->current();
     }
