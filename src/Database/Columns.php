@@ -36,7 +36,7 @@ class Columns extends \stdClass
     public int|null $rowid = null;
 
     /** @var int|null rev */
-    public int|null $rev = 0;
+    public int|null $rev = null;
 
     /**
      * constructor.
