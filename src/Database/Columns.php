@@ -10,15 +10,18 @@ declare(strict_types=1);
 
 namespace Citrus\Database;
 
+use Citrus\Database\ResultSet\BindColumn;
+use Citrus\Database\ResultSet\ResultClass;
 use Citrus\Variable\Binders;
 use Citrus\Variable\Dates;
 
 /**
  * データベースカラム情報
  */
-class Columns extends \stdClass
+class Columns extends \stdClass implements ResultClass
 {
     use Binders;
+    use BindColumn;
 
     /** @var string|null schema */
     public string|null $schema = null;
