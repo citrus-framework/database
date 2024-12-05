@@ -24,7 +24,6 @@ trait Postgres
 
     /**
      * データベースタイプがPostgreSQLかどうか
-     *
      * @return bool
      */
     public function isPostgreSQL()

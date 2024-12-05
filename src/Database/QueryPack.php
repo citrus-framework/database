@@ -15,18 +15,21 @@ namespace Citrus\Database;
  */
 class QueryPack
 {
-    /** @var string クエリ */
-    protected string $query;
-
-    /** @var array パラメータ */
-    protected array $parameters = [];
-
-    /** @var string|null 結果クラス */
-    protected string|null $result_class = null;
+    /**
+     * constructor.
+     * @param string      $query        クエリ
+     * @param array       $parameters   パラメータ
+     * @param string|null $result_class 結果クラス
+     */
+    public function __construct(
+        protected string $query,
+        protected array $parameters = [],
+        protected string|null $result_class = null,
+    ) {
+    }
 
     /**
      * クエリの取得
-     *
      * @return string
      */
     public function callQuery(): string
@@ -36,7 +39,6 @@ class QueryPack
 
     /**
      * パラメタの取得
-     *
      * @return array
      */
     public function callParameters(): array
@@ -46,7 +48,6 @@ class QueryPack
 
     /**
      * 結果クラスの取得
-     *
      * @return string
      */
     public function callResultClass(): string
@@ -56,18 +57,14 @@ class QueryPack
 
     /**
      * ジェネレータ
-     *
      * @param string      $query        クエリ
      * @param array       $parameters   パラメタ
      * @param string|null $result_class 結果クラス
-     * @return self
+     * @return $this
+     * @deprecated constructorに移行したい
      */
-    public static function pack(string $query, array $parameters, string|null $result_class)
+    public static function pack(string $query, array $parameters, string|null $result_class): self
     {
-        $self = new self();
-        $self->query = $query;
-        $self->parameters = $parameters;
-        $self->result_class = $result_class;
-        return $self;
+        return new self($query, $parameters, $result_class);
     }
 }

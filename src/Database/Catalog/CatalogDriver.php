@@ -20,7 +20,6 @@ abstract class CatalogDriver
 {
     /**
      * constructor.
-     *
      * @param DSN|null $dsn     DB接続情報
      * @param PDO|null $handler DBハンドラ
      */
@@ -33,7 +32,6 @@ abstract class CatalogDriver
 
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return ColumnDef[]
      */
@@ -41,7 +39,6 @@ abstract class CatalogDriver
 
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return array
      */
@@ -49,7 +46,6 @@ abstract class CatalogDriver
 
     /**
      * テーブルのプライマリキー定義の取得
-     *
      * @param string $table_name テーブル名
      * @return array
      */

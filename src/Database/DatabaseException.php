@@ -20,7 +20,6 @@ class DatabaseException extends CitrusException
 {
     /**
      * PDO exception
-     *
      * @param PDOException $e
      * @return self
      */
@@ -31,7 +30,6 @@ class DatabaseException extends CitrusException
 
     /**
      * pdo errorInfo
-     *
      * @param array $errorInfo
      * @return self
      */
@@ -42,7 +40,6 @@ class DatabaseException extends CitrusException
 
     /**
      * {@inheritDoc}
-     *
      * @throws DatabaseException
      */
     public static function exceptionIf($expr, string $message): void
@@ -52,7 +49,6 @@ class DatabaseException extends CitrusException
 
     /**
      * {@inheritDoc}
-     *
      * @throws DatabaseException
      */
     public static function exceptionElse($expr, string $message): void

@@ -25,7 +25,6 @@ class ConnectionPool
 
     /**
      * Connectionの生成と取得
-     *
      * @param DSN|null  $dsn        DSN情報
      * @param bool|null $is_default defaultコネクション
      * @return Connection
@@ -46,7 +45,6 @@ class ConnectionPool
 
     /**
      * デフォルト設定されているコネクションを取得
-     *
      * @return Connection|null
      */
     public static function callDefault(): ?Connection

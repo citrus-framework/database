@@ -21,7 +21,6 @@ class Postgres extends CatalogDriver
 {
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return ColumnDef[] キーはカラム名
      */
@@ -58,7 +57,6 @@ SQL
 
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return ColumnDef[] キーはカラム名
      */
@@ -99,7 +97,6 @@ SQL
 
     /**
      * テーブルのプライマリキー定義の取得
-     *
      * @param string $table_name テーブル名
      * @return string[]
      */

@@ -21,7 +21,6 @@ class Connection
 {
     /**
      * constructor.
-     *
      * @param DSN|null $dsn    DSN情報
      * @param PDO|null $handle ハンドラー
      */
@@ -41,7 +40,6 @@ class Connection
 
     /**
      * データベース接続
-     *
      * @return void
      * @throws DatabaseException
      */
@@ -71,7 +69,6 @@ class Connection
 
     /**
      * データベース切断
-     *
      * @return void
      */
     public function disconnect(): void
@@ -81,7 +78,6 @@ class Connection
 
     /**
      * ハンドルの取得
-     *
      * @return PDO
      * @throws DatabaseException
      */
@@ -94,7 +90,6 @@ class Connection
 
     /**
      * トランザクション開始
-     *
      * @return void
      */
     public function begin(): void
@@ -107,7 +102,6 @@ class Connection
 
     /**
      * コミット
-     *
      * @return void
      */
     public function commit(): void
@@ -120,7 +114,6 @@ class Connection
 
     /**
      * ロールバック
-     *
      * @return void
      */
     public function rollback(): void
@@ -133,7 +126,6 @@ class Connection
 
     /**
      * トランザクション処理
-     *
      * @param callable $transaction
      * @return void
      * @throws DatabaseException

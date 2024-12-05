@@ -24,7 +24,6 @@ class CatalogManager
 
     /**
      * constructor.
-     *
      * @param DSN $dsn
      */
     public function __construct(DSN $dsn)
@@ -45,7 +44,6 @@ class CatalogManager
 
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return ColumnDef[] キーはカラム名
      */
@@ -56,7 +54,6 @@ class CatalogManager
 
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return ColumnDef[] キーはカラム名
      */
@@ -67,7 +64,6 @@ class CatalogManager
 
     /**
      * テーブルのプライマリキー定義の取得
-     *
      * @param string $table_name テーブル名
      * @return string[]
      */

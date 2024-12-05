@@ -41,7 +41,6 @@ class Result extends Columns implements ResultClass
     /**
      * 結果内容のバインド
      * 必要ないパターンも多いので、実装化してしまう
-     *
      * @return self
      */
     public function bindColumn(): self

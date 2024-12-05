@@ -52,7 +52,6 @@ class DSN extends Configurable
 
     /**
      * {@inheritDoc}
-     *
      * @return self
      */
     public function loadConfigures(array $configures = []): Configurable
@@ -67,7 +66,6 @@ class DSN extends Configurable
 
     /**
      * generate dsn string
-     *
      * @return string
      */
     public function toString()
@@ -96,7 +94,6 @@ class DSN extends Configurable
 
     /**
      * generate dsn string with authentication
-     *
      * @return string
      */
     public function toStringWithAuth()
