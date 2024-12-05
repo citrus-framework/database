@@ -26,7 +26,6 @@ class ColumnDef
 
     /**
      * 生成処理(データタイプ用)
-     *
      * @param string $column_name カラム名
      * @param string $data_type   データ型
      * @return self
@@ -41,7 +40,6 @@ class ColumnDef
 
     /**
      * 生成処理(コメント用)
-     *
      * @param string      $column_name カラム名
      * @param string|null $comment     コメント
      * @return self

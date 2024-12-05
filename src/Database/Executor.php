@@ -22,7 +22,6 @@ class Executor
 {
     /**
      * constructor.
-     *
      * @param Connection|null $connection  接続情報
      * @throws DatabaseException
      */
@@ -30,14 +29,13 @@ class Executor
         protected Connection|null $connection = null
     ) {
         // なければPOOLから取得
-        $this->connection = $connection ?: ConnectionPool::callDefault();
+        $this->connection = $connection ?? ConnectionPool::callDefault();
         // 接続もしてしまう
         $this->connection->connect();
     }
 
     /**
      * SELECT
-     *
      * @param QueryPack $queryPack
      * @return ResultSet
      * @throws DatabaseException
@@ -52,7 +50,6 @@ class Executor
 
     /**
      * INSERT
-     *
      * @param QueryPack $queryPack
      * @return int
      * @throws DatabaseException
@@ -70,7 +67,6 @@ class Executor
 
     /**
      * UPDATE
-     *
      * @param QueryPack $queryPack
      * @return int
      * @throws DatabaseException
@@ -88,7 +84,6 @@ class Executor
 
     /**
      * DELETE
-     *
      * @param QueryPack $queryPack
      * @return int
      * @throws DatabaseException
@@ -112,7 +107,6 @@ class Executor
 
     /**
      * プリペアとパラメータ設定
-     *
      * @param QueryPack $queryPack
      * @return PDOStatement
      * @throws DatabaseException

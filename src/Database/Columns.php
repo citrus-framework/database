@@ -69,7 +69,6 @@ class Columns extends \stdClass implements ResultClass
 
     /**
      * プライマリキーのカラム名配列を取得
-     *
      * @return string[]
      */
     public function callPrimaryKeys(): array
@@ -79,7 +78,6 @@ class Columns extends \stdClass implements ResultClass
 
     /**
      * INSERT時に必要なカラム情報を補完する
-     *
      * @param string|null $timestamp
      */
     public function completeCreateColumn(string|null $timestamp = null): void
@@ -94,7 +92,6 @@ class Columns extends \stdClass implements ResultClass
 
     /**
      * UPDATE時に必要なカラム情報を補完する
-     *
      * @param string|null $timestamp
      */
     public function completeUpdateColumn(string|null $timestamp = null): void

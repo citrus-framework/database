@@ -21,7 +21,6 @@ class Sqlite extends CatalogDriver
 {
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return ColumnDef[] キーはカラム名
      */
@@ -44,7 +43,6 @@ class Sqlite extends CatalogDriver
 
     /**
      * テーブルのカラム定義の取得
-     *
      * @param string $table_name テーブル名
      * @return ColumnDef[] キーはカラム名
      */
@@ -56,7 +54,6 @@ class Sqlite extends CatalogDriver
 
     /**
      * テーブルのプライマリキー定義の取得
-     *
      * @param string $table_name テーブル名
      * @return string[]
      */

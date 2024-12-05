@@ -22,7 +22,6 @@ trait Sqlite
 
     /**
      * データベースタイプがSQLiteかどうか
-     *
      * @return bool
      */
     public function isSQLite()

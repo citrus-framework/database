@@ -17,14 +17,12 @@ use PDOStatement;
 
 /**
  * 結果セット(クラスオブジェクトのインスタンス)
- *
  * @see https://docs.oracle.com/javase/jp/8/docs/api/java/sql/ResultSet.html
  */
 class ResultSet implements IteratorAggregate, Countable
 {
     /**
      * constructor.
-     *
      * @param PDOStatement $statement    PDOのステートメント
      * @param string        $result_class 返却クラス
      */
@@ -58,7 +56,6 @@ class ResultSet implements IteratorAggregate, Countable
 
     /**
      * 配列化して取得
-     *
      * @return array $this->result_class型
      */
     public function toList(): array
@@ -75,7 +72,6 @@ class ResultSet implements IteratorAggregate, Countable
 
     /**
      * 件数取得
-     *
      * @return int
      */
     public function count(): int
@@ -85,7 +81,6 @@ class ResultSet implements IteratorAggregate, Countable
 
     /**
      * 1件取得
-     *
      * @return ResultClass|null
      */
     public function one(): ResultClass|null
@@ -95,7 +90,6 @@ class ResultSet implements IteratorAggregate, Countable
 
     /**
      * ステートメントの実行
-     *
      * @return PDOStatement
      */
     private function execute(): PDOStatement
