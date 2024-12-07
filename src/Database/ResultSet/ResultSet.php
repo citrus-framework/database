@@ -57,8 +57,25 @@ class ResultSet implements IteratorAggregate, Countable
     /**
      * 配列化して取得
      * @return array $this->result_class型
+     * @deprecated all()の方を使っていきたい
      */
     public function toList(): array
+    {
+        // 実行してバインド
+        $results = $this->execute()->fetchAll();
+        /** @var ResultClass $row */
+        foreach ($results as $row)
+        {
+            $row->bindColumn();
+        }
+        return $results;
+    }
+
+    /**
+     * 配列化して取得
+     * @return ResultClass[]
+     */
+    public function all(): array
     {
         // 実行してバインド
         $results = $this->execute()->fetchAll();

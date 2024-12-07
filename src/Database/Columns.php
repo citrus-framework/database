@@ -63,7 +63,6 @@ class Columns extends \stdClass implements ResultClass
                 unset($properties[$ky]);
             }
         }
-
         return $properties;
     }
 
@@ -123,7 +122,7 @@ class Columns extends \stdClass implements ResultClass
         $properties = $this->properties();
         foreach ($properties as $ky => $vl)
         {
-            if (false === in_array($ky, ['schema']))
+            if ($ky !== 'schema')
             {
                 $this->$ky = null;
             }
