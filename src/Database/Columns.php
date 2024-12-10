@@ -67,6 +67,23 @@ class Columns extends \stdClass implements ResultClass
     }
 
     /**
+     * インスタンスのプロパティを配列で取得
+     * nullはunsetする
+     */
+    public function nullUnsetProperties(): array
+    {
+        $properties = $this->properties();
+        foreach ($properties as $ky => $vl)
+        {
+            if (true === is_null($vl))
+            {
+                unset($properties[$ky]);
+            }
+        }
+        return $properties;
+    }
+
+    /**
      * プライマリキーのカラム名配列を取得
      * @return string[]
      */
