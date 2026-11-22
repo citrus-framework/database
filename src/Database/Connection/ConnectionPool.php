@@ -35,7 +35,7 @@ class ConnectionPool
         // 生成して設定
         self::$POOLS[$dsn_key] = (self::$POOLS[$dsn_key] ?? new Connection($dsn));
         // デフォルト設定
-        if (true === $is_default)
+        if ($is_default === true)
         {
             self::$DEFAULT_POOL_KEY = $dsn_key;
         }
@@ -50,7 +50,7 @@ class ConnectionPool
     public static function callDefault(): ?Connection
     {
         // デフォルト設定がある場合は取得
-        if (false === is_null(self::$DEFAULT_POOL_KEY))
+        if (self::$DEFAULT_POOL_KEY !== null)
         {
             return (self::$POOLS[self::$DEFAULT_POOL_KEY] ?? null);
         }

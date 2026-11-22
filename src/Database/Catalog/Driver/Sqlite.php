@@ -69,7 +69,7 @@ class Sqlite extends CatalogDriver
         $primary_keys = [];
         foreach ($results as $row)
         {
-            if (1 === $row['pk'])
+            if ($row['pk'] === 1)
             {
                 $primary_keys[] = $row['name'];
             }

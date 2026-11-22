@@ -45,7 +45,7 @@ class ResultSet implements IteratorAggregate, Countable
         foreach ($this->statement as $row)
         {
             // 有れば実行、基本的には有る前提
-            if (true === method_exists($row, 'bindColumn'))
+            if (method_exists($row, 'bindColumn') === true)
             {
                 $row->bindColumn();
             }
