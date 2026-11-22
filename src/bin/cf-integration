@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @copyright   Copyright 2026, CitrusDatabase. All Rights Reserved.
+ * @author      take64 <take64@citrus.tk>
+ * @license     http://www.citrus.tk/
+ */
+/**
+ * sample :
+ *
+./vendor/bin/cf-integration --domain=citron.project.tk --type=${type} --table_name=${name} --class_prefix=${prefix}
+./vendor/bin/cf-integration --domain=citron.project.tk --type=all --table_name=tags --class_prefix=Tag
+ */
+
+// search directory
+$current_dirs = explode('/', dir(__DIR__)->path);
+$paths = [];
+foreach ($current_dirs as $row)
+{
+    // vendorまで来たらストップ
+    if ('vendor' === $row)
+    {
+        break;
+    }
+    $paths[] = $row;
+}
+
+// autoload
+$autoload_paths = $paths;
+$autoload_paths[] = 'vendor';
+$autoload_paths[] = 'autoload.php';
+$autoload_path = implode('/', $autoload_paths);
+require $autoload_path;
+
+// configure
+$configure_paths = $paths;
+$configure_paths[] = 'citrus-configure.php';
+$configure_path = implode('/', $configure_paths);
+$configures = include($configure_path);
+
+// run!
+Citrus\Database\GenerateCommand::runner($configures);

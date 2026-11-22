@@ -46,7 +46,7 @@ class Connection
     public function connect(): void
     {
         // 設定済みの場合はスルー
-        if (false === is_null($this->handle))
+        if ($this->handle !== null)
         {
             return;
         }
@@ -63,7 +63,7 @@ class Connection
         }
         catch (\PDOException $e)
         {
-            throw new DatabaseException($e->getMessage(), $e->getCode());
+            throw DatabaseException::fromThrowable($e);
         }
     }
 
@@ -94,10 +94,7 @@ class Connection
      */
     public function begin(): void
     {
-        if (false === is_null($this->handle))
-        {
-            $this->handle->beginTransaction();
-        }
+        $this->handle?->beginTransaction();
     }
 
     /**
@@ -106,10 +103,7 @@ class Connection
      */
     public function commit(): void
     {
-        if (false === is_null($this->handle))
-        {
-            $this->handle->commit();
-        }
+        $this->handle?->commit();
     }
 
     /**
@@ -118,10 +112,7 @@ class Connection
      */
     public function rollback(): void
     {
-        if (false === is_null($this->handle))
-        {
-            $this->handle->rollBack();
-        }
+        $this->handle?->rollBack();
     }
 
     /**
@@ -132,22 +123,7 @@ class Connection
      */
     public function transaction(callable $transaction): void
     {
-        // トランザクション開始
-        $this->begin();
-        try
-        {
-            // トランザクション内処理
-            $transaction();
-            // コミット
-            $this->commit();
-        }
-        catch (\Exception $e)
-        {
-            // ロールバック
-            $this->rollback();
-            /** @var DatabaseException $e */
-            $e = DatabaseException::convert($e);
-            throw $e;
-        }
+        // 分岐の数を抑えるため、処理は TransactionRunner に任せる
+        (new TransactionRunner($this))->run($transaction);
     }
 }

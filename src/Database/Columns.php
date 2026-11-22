@@ -13,7 +13,6 @@ namespace Citrus\Database;
 use Citrus\Database\ResultSet\BindColumn;
 use Citrus\Database\ResultSet\ResultClass;
 use Citrus\Variable\Binders;
-use Citrus\Variable\Dates;
 
 /**
  * データベースカラム情報
@@ -56,14 +55,8 @@ class Columns extends \stdClass implements ResultClass
     {
         $properties = get_object_vars($this);
         unset($properties['schema']);
-        foreach ($properties as $ky => $vl)
-        {
-            if (true === is_bool($vl))
-            {
-                unset($properties[$ky]);
-            }
-        }
-        return $properties;
+        // bool は除く
+        return array_filter($properties, static fn ($vl) => is_bool($vl) === false);
     }
 
     /**
@@ -72,15 +65,7 @@ class Columns extends \stdClass implements ResultClass
      */
     public function nullUnsetProperties(): array
     {
-        $properties = $this->properties();
-        foreach ($properties as $ky => $vl)
-        {
-            if (true === is_null($vl))
-            {
-                unset($properties[$ky]);
-            }
-        }
-        return $properties;
+        return array_filter($this->properties(), static fn ($vl) => $vl !== null);
     }
 
     /**
@@ -99,9 +84,9 @@ class Columns extends \stdClass implements ResultClass
     public function completeCreateColumn(string|null $timestamp = null): void
     {
         // スキーマ設定
-        $this->schema = $this->schema ?? DSN::getInstance()->schema;
+        $this->schema = ColumnsCompletion::schema($this->schema);
         // タイムスタンプ設定
-        $timestamp = $timestamp ?? Dates::now()->format('Y-m-d H:i:s');
+        $timestamp = ColumnsCompletion::timestamp($timestamp);
         $this->created_at = $timestamp;
         $this->updated_at = $timestamp;
     }
@@ -113,10 +98,9 @@ class Columns extends \stdClass implements ResultClass
     public function completeUpdateColumn(string|null $timestamp = null): void
     {
         // スキーマ設定
-        $this->schema = $this->schema ?? DSN::getInstance()->schema;
+        $this->schema = ColumnsCompletion::schema($this->schema);
         // タイムスタンプ設定
-        $timestamp = $timestamp ?? Dates::now()->format('Y-m-d H:i:s');
-        $this->updated_at = $timestamp;
+        $this->updated_at = ColumnsCompletion::timestamp($timestamp);
     }
 
     /**
@@ -136,13 +120,10 @@ class Columns extends \stdClass implements ResultClass
      */
     public function nullify(): void
     {
-        $properties = $this->properties();
-        foreach ($properties as $ky => $vl)
+        // schema は消さない
+        foreach (array_keys(array_diff_key($this->properties(), ['schema' => null])) as $ky)
         {
-            if ($ky !== 'schema')
-            {
-                $this->$ky = null;
-            }
+            $this->$ky = null;
         }
     }
 }

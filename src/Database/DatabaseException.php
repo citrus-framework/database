@@ -25,7 +25,21 @@ class DatabaseException extends CitrusException
      */
     public static function pdoException(PDOException $e)
     {
-        return new static($e->getMessage(), $e->getCode());
+        return static::fromThrowable($e);
+    }
+
+    /**
+     * 例外から作り直す
+     *
+     * 文は元の例外のまま、previous に元の例外を入れる。
+     * コードは、整数ならそのまま使い、そうでなければ0にする(PDOException のコードは SQLSTATE の文字列のため)
+     * @param \Throwable $e 元の例外
+     * @return static
+     */
+    public static function fromThrowable(\Throwable $e): static
+    {
+        $code = $e->getCode();
+        return new static($e->getMessage(), is_int($code) ? $code : 0, $e);
     }
 
     /**

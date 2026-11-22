@@ -41,8 +41,8 @@ SQL
         );
         $stmt->execute([
             ':database' => $this->dsn->database,
-            ':schema'   => $this->dsn->schema,
-            ':table'    => $table_name,
+            ':schema' => $this->dsn->schema,
+            ':table' => $table_name,
         ]);
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -82,7 +82,7 @@ SQL
         );
         $stmt->execute([
             ':schema' => $this->dsn->schema,
-            ':table'  => $table_name,
+            ':table' => $table_name,
         ]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // コメントデータ
@@ -105,19 +105,26 @@ SQL
         $stmt = $this->handler->prepare(
             <<<SQL
 SELECT
-      constraint_column_usage.column_name
-FROM information_schema.table_constraints
-INNER JOIN information_schema.constraint_column_usage
-        ON constraint_column_usage.constraint_name = table_constraints.constraint_name
-       AND constraint_column_usage.table_name = table_constraints.table_name
-       AND constraint_column_usage.table_schema = table_constraints.table_schema
-       AND constraint_column_usage.table_catalog = table_constraints.table_catalog
-       AND constraint_column_usage.table_catalog = table_constraints.table_catalog
-WHERE table_constraints.constraint_type = 'PRIMARY KEY'
-  AND table_constraints.table_name = :table
+      pg_attribute.attname AS column_name
+FROM pg_index
+INNER JOIN pg_class
+        ON pg_class.oid = pg_index.indrelid
+INNER JOIN pg_namespace
+        ON pg_namespace.oid = pg_class.relnamespace
+INNER JOIN pg_attribute
+        ON pg_attribute.attrelid = pg_class.oid
+       AND pg_attribute.attnum = ANY(pg_index.indkey)
+WHERE pg_index.indisprimary
+  AND array_position(CAST(pg_index.indkey AS int2[]), pg_attribute.attnum)
+      - array_lower(CAST(pg_index.indkey AS int2[]), 1) < pg_index.indnkeyatts
+  AND pg_namespace.nspname = :schema
+  AND pg_class.relname = :table
+ORDER BY array_position(CAST(pg_index.indkey AS int2[]), pg_attribute.attnum)
 SQL
         );
+        // information_schema はテーブルの持ち主にしか制約の列を見せないので、pg_catalog から読む(INCLUDE の列は除く)
         $stmt->execute([
+            ':schema' => $this->dsn->schema,
             ':table' => $table_name,
         ]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
