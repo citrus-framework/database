@@ -29,13 +29,13 @@ class CatalogManager
     public function __construct(DSN $dsn)
     {
         // PostgreSQL
-        if (true === $dsn->isPostgreSQL())
+        if ($dsn->isPostgreSQL() === true)
         {
             $this->catalogDriver = new Postgres($dsn);
             return;
         }
         // SQLite
-        if (true === $dsn->isSQLite())
+        if ($dsn->isSQLite() === true)
         {
             $this->catalogDriver = new Sqlite($dsn);
             return;

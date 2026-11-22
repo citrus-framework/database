@@ -60,7 +60,6 @@ class ConnectionPoolTest extends TestCase
      * @test
      * @throws ConfigureException
      * @throws DatabaseException
-     * @doesNotPerformAssertions
      */
     public function コネクションは使い回される()
     {

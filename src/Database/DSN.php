@@ -71,7 +71,7 @@ class DSN extends Configurable
     public function toString()
     {
         // PostgreSQL
-        if (true === $this->isPostgreSQL())
+        if ($this->isPostgreSQL() === true)
         {
             return sprintf(
                 'pgsql:host=%s;port=%s;dbname=%s',
@@ -81,7 +81,7 @@ class DSN extends Configurable
             );
         }
         // SQLite
-        if (true === $this->isSQLite())
+        if ($this->isSQLite() === true)
         {
             return sprintf(
                 'sqlite:%s',
@@ -99,7 +99,7 @@ class DSN extends Configurable
     public function toStringWithAuth()
     {
         // PostgreSQL
-        if (true === $this->isPostgreSQL())
+        if ($this->isPostgreSQL() === true)
         {
             return sprintf(
                 'pgsql:host=%s;port=%s;dbname=%s;user=%s;password=%s',
@@ -111,7 +111,7 @@ class DSN extends Configurable
             );
         }
         // SQLite
-        if (true === $this->isSQLite())
+        if ($this->isSQLite() === true)
         {
             return sprintf(
                 'sqlite:%s',

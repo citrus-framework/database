@@ -92,7 +92,7 @@ class Executor
     {
         // 削除全実行はフレームワークとして許容しない(全実行する場合は条件を明示的につける ex.)WHERE 1=1)
         DatabaseException::exceptionIf(
-            0 === count($queryPack->callParameters()),
+            count($queryPack->callParameters()) === 0,
             '削除条件が足りません、削除要求をキャンセルしました。'
         );
 
@@ -118,7 +118,7 @@ class Executor
 
         // プリペア実行
         $statement = $handle->prepare($queryPack->callQuery());
-        if (false === $statement)
+        if ($statement === false)
         {
             throw DatabaseException::pdoErrorInfo($handle->errorInfo());
         }
