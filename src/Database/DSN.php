@@ -54,7 +54,7 @@ class DSN extends Configurable
      * {@inheritDoc}
      * @return self
      */
-    public function loadConfigures(array $configures = []): Configurable
+    public function loadConfigures(#[\SensitiveParameter] array $configures = []): Configurable
     {
         parent::loadConfigures($configures);
 
